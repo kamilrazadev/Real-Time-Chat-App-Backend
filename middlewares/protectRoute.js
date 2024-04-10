@@ -3,11 +3,11 @@ import User from "../models/user.model.js";
 
 const protectRoute = async (req, res, next) => {
   try {
-    const token = req.cookies.token;
+    const { token } = req.body;
 
     if (!token) {
       return res.status(401).json({
-        error: "Unauthorized - No token provided",
+        error: "Unauthorized - Not Loggedin",
       });
     }
 
@@ -15,7 +15,7 @@ const protectRoute = async (req, res, next) => {
 
     if (!decoded) {
       return res.status(401).json({
-        error: "Unauthorized - Invalid token",
+        error: "Unauthorized - Invalid user",
       });
     }
 

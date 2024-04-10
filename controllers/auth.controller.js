@@ -44,7 +44,7 @@ export const signup = async (req, res) => {
       profilePic: newUser.profilePic,
     });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" + error.message });
+    res.status(500).json({ error: "Internal Server Error " + error.message });
     console.log("error in signup: ", error.message);
   }
 };
@@ -67,13 +67,14 @@ export const login = async (req, res) => {
       });
     }
 
-    generateTokenAndSetCookie(user._id, res);
+    const token = generateTokenAndSetCookie(user._id, res);
 
     res.status(201).json({
       _id: user._id,
       fullName: user.fullName,
       username: user.username,
       profilePic: user.profilePic,
+      token: token,
     });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error: " + error.message });
