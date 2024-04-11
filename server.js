@@ -8,9 +8,9 @@ import authRoutes from "./routes/auth.routes.js";
 import messageRoutes from "./routes/message.routes.js";
 import userRoutes from "./routes/user.routes.js";
 
+import { app, server } from "./socket/socket.js";
 import { connectToMongoDB } from "./db/connectMongo.js";
 
-const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
@@ -30,7 +30,7 @@ app.use("/api/user", userRoutes);
 //   res.send("Server Running");
 // });
 
-app.listen(port, () => {
+server.listen(port, () => {
   connectToMongoDB()
     .then(() => {
       console.log(`Server running on port ${port}`);
