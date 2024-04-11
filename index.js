@@ -29,12 +29,8 @@ app.get("/", (req, res) => {
   res.send("Server Running");
 });
 
+connectToMongoDB();
+
 server.listen(port, () => {
-  connectToMongoDB()
-    .then(() => {
-      console.log(`Server running on port ${port}`);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
+  console.log(`Server running on port ${port}`);
 });
