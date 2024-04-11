@@ -34,7 +34,7 @@ export const signup = async (req, res) => {
       profilePic: gender === "male" ? maleAvatar : femaleAvatar,
     });
 
-    generateTokenAndSetCookie(newUser._id, res);
+    const token = generateTokenAndSetCookie(newUser._id, res);
     await newUser.save();
 
     res.status(201).json({
@@ -42,6 +42,7 @@ export const signup = async (req, res) => {
       fullName: newUser.fullName,
       username: newUser.username,
       profilePic: newUser.profilePic,
+      token: token,
     });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error " + error.message });
