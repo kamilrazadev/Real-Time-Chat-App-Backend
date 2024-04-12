@@ -1,6 +1,6 @@
-import User from "../models/user.model.js";
+const User = require("../models/user.model.js");
 
-export const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
 
@@ -12,3 +12,5 @@ export const getAllUsers = async (req, res) => {
     console.log("error in getting all conversations: ", error.message);
   }
 };
+
+module.exports = { getAllUsers };

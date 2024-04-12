@@ -1,8 +1,8 @@
-import Conversation from "../models/conversation.model.js";
-import Message from "../models/message.model.js";
-import { getRecieverSocketId, io } from "../socket/socket.js";
+const Conversation = require("../models/conversation.model.js");
+const Message = require("../models/message.model.js");
+const { getRecieverSocketId, io } = require("../socket/socket.js");
 
-export const sendMessage = async (req, res) => {
+const sendMessage = async (req, res) => {
   try {
     const { message } = req.body;
     const { id: recieverId } = req.params;
@@ -50,7 +50,7 @@ export const sendMessage = async (req, res) => {
   }
 };
 
-export const getMessage = async (req, res) => {
+const getMessage = async (req, res) => {
   try {
     const { id: userToChatId } = req.params;
     const senderId = req.user._id;
@@ -68,4 +68,9 @@ export const getMessage = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error: " + error.message });
     console.log("error in getting conversation: ", error.message);
   }
+};
+
+module.exports = {
+  sendMessage,
+  getMessage,
 };

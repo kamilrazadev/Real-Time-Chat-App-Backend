@@ -1,6 +1,6 @@
-import { Server } from "socket.io";
-import http from "http";
-import express from "express";
+const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
 
 const app = express();
 
@@ -11,14 +11,13 @@ const io = new Server(server, {
   },
 });
 
-export const getRecieverSocketId = (recieverId) => {
+const getRecieverSocketId = (recieverId) => {
   return userSocketMap[recieverId];
 };
 
 const userSocketMap = {}; //userId: socketId
 
 io.on("connection", (socket) => {
-
   const userId = socket.handshake.query.userId;
   if (userId != "undefined") userSocketMap[userId] = socket.id;
 
@@ -28,9 +27,8 @@ io.on("connection", (socket) => {
   // socket.on() is used to listen events, can be used in both client and server
   socket.on("disconnect", () => {
     delete userSocketMap[userId];
-
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });
 
-export { app, io, server };
+module.exports = { app, io, server, getRecieverSocketId };

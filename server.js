@@ -1,15 +1,15 @@
-import express from "express";
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import { configDotenv } from "dotenv";
-configDotenv();
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
 
-import authRoutes from "./routes/auth.routes.js";
-import messageRoutes from "./routes/message.routes.js";
-import userRoutes from "./routes/user.routes.js";
+const authRoutes = require("./routes/auth.routes.js");
+const messageRoutes = require("./routes/message.routes.js");
+const userRoutes = require("./routes/user.routes.js");
 
-import { app, server } from "./socket/socket.js";
-import { connectToMongoDB } from "./db/connectMongo.js";
+const { app, server } = require("./socket/socket.js");
+const { connectToMongoDB } = require("./db/connectMongo.js");
 
 const port = process.env.PORT;
 
