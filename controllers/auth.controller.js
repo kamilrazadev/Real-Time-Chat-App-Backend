@@ -23,6 +23,9 @@ const signup = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    // https://avatar-placeholder.iran.liara.run
+
+    // // for name letters https://avatar.iran.liara.run/username?username=[firstname+lastname]
     const maleAvatar = `https://avatar.iran.liara.run/public/boy?username=${username}`;
     const femaleAvatar = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
